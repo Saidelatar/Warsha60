@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:warsha60/features/Auth/presentation/views/widgets/cutsom__textfield.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  GlobalKey<FormState> formKey = GlobalKey();
+  String? email, password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,7 +18,7 @@ class Login extends StatelessWidget {
         children: [
           // Left Section
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -61,94 +69,84 @@ class Login extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Container(
               color: Colors.white,
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(32.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Hello Again!',
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        'Welcome Back',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-                      TextField(
-                        decoration: InputDecoration(
-                          labelStyle: TextStyle(
-                              color: Color(0xff333333).withOpacity(0.30)),
-                          labelText: 'Email Address',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(80.0),
-                          ),
-                          prefixIcon: Icon(
-                            Icons.email,
-                            color: Color(0xff333333).withOpacity(0.30),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Hello Again!',
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelStyle: TextStyle(
-                              color: Color(0xff333333).withOpacity(0.30)),
-                          labelText: 'Password',
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xff333333).withOpacity(0.30),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Welcome Back',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        CustomTextField(
+                            onChanged: (data) {
+                              email = data;
+                            },
+                            prefixIcon: Icon(
+                              Icons.email,
+                              color: Color.fromARGB(255, 211, 207, 207),
                             ),
-                            borderRadius: BorderRadius.circular(80),
+                            labelText: 'Email Address'),
+                        const SizedBox(height: 16),
+                        CustomTextField(
+                            onChanged: (data) {
+                              password = data;
+                            },
+                            obscureText: true,
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: Color.fromARGB(255, 211, 207, 207),
+                            ),
+                            labelText: 'Password'),
+                        const SizedBox(height: 32),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff0575E6),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 64.0,
+                              vertical: 16.0,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                           ),
-                          prefixIcon: Icon(
-                            Icons.lock,
-                            color: Color(0xff333333).withOpacity(0.30),
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(
+                                fontSize: 18, color: Color(0xffffffff)),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 32),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xff0575E6),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 64.0,
-                            vertical: 16.0,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                        const SizedBox(height: 16),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Forgot Password',
+                            style: TextStyle(color: Color(0xff333333)),
                           ),
                         ),
-                        child: const Text(
-                          'Login',
-                          style:
-                              TextStyle(fontSize: 18, color: Color(0xffffffff)),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Forgot Password',
-                          style: TextStyle(color: Colors.black54),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
